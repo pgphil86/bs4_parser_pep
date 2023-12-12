@@ -74,6 +74,7 @@ python3 main.py pep
 ```
 python3 main.py -c
 ```
+[Вверх.](https://github.com/pgphil86/bs4_parser_pep?tab=readme-ov-file#pep-parsing-project-created-by-pavel)
 ## II. 'PEP parsing project'.
 
 ### Description of the project.
@@ -140,3 +141,4 @@ To clear the cache, use -c or --clear-cache.
 ```
 python3 main.py -c
 ```
+[Up.](https://github.com/pgphil86/bs4_parser_pep?tab=readme-ov-file#pep-parsing-project-created-by-pavel)
