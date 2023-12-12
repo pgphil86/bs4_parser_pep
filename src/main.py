@@ -2,12 +2,13 @@ import logging
 import re
 from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
 import requests_cache
+from bs4 import BeautifulSoup
 from tqdm import tqdm
 
 from configs import configure_argument_parser, configure_logging
-from constants import BASE_DIR, EXPECTED_STATUS, MAIN_DOC_URL, PEP_DOC_URL
+from constants import (BASE_DIR, DOWNLOAD_HREF, EXPECTED_STATUS,
+                       LATEST_VERSION_PATTERN, MAIN_DOC_URL, PEP_DOC_URL)
 from outputs import control_output
 from utils import find_tag, get_response
 
@@ -70,7 +71,7 @@ def latest_versions(session):
 
     results = [('Ссылка на документацию', 'Версия', 'Статус')]
 
-    pattern = r'Python (?P<version>\d\.\d+) \((?P<status>.*)\)'
+    pattern = LATEST_VERSION_PATTERN
     for a_tag in a_tags:
         link = a_tag['href']
         text_match = re.search(pattern, a_tag.text)
@@ -97,7 +98,7 @@ def download(session):
     soup = BeautifulSoup(response.text, features='lxml')
     table_tag = find_tag(soup, 'table', {'class': 'docutils'})
     a4_tag = find_tag(table_tag, 'a',
-                      {'href': re.compile(r'.+pdf-a4\.zip$')}
+                      {'href': re.compile(DOWNLOAD_HREF)}
                       )
     a4_link = a4_tag['href']
     archive_url = urljoin(downloads_url, a4_link)
@@ -124,7 +125,6 @@ def pep(session):
     tbody_tags = find_tag(section_tag, 'tbody')
     tr_tag = tbody_tags.find_all('tr')
     results = [('Статус', 'Количество')]
-    total = 0
     status_count = {}
     for tr_tag in tqdm(tr_tag):
         preview_status = find_tag(tr_tag, 'abbr').text[1:]
@@ -154,9 +154,9 @@ def pep(session):
                 )
         except KeyError:
             logging.error(f'Ошибка кода статуса {preview_status}')
-        total += 1
-    results.extend(status_count.items())
-    results.append(('Total', total))
+    for count in status_count:
+        results.append((count, status_count[count]))
+    results.append(('Total', sum(status_count.values())))
     return results
 
 
