@@ -21,7 +21,7 @@ def whats_new(session):
 
     response = get_response(session, whats_new_url)
     if response is None:
-            return
+        return
     soup = BeautifulSoup(response.text, features='lxml')
     main_div = find_tag(soup, 'section', attrs={'id': 'what-s-new-in-python'})
     div_with_ul = find_tag(main_div, 'div', attrs={'class': 'toctree-wrapper'})
@@ -142,7 +142,8 @@ def pep(session):
         )
         dl_string = dl_tag.find(string='Status')
         pep_status_page = dl_string.parent.find_next_sibling('dd').string
-        status_count[pep_status_page] = status_count.get(pep_status_page, 0) + 1
+        status_count[pep_status_page] = status_count.get(pep_status_page,
+                                                         0) + 1
         try:
             if pep_status_page not in EXPECTED_STATUS[preview_status]:
                 logging.info(
@@ -167,7 +168,7 @@ MODE_TO_FUNCTION = {
 }
 
 
-def main():    
+def main():
     configure_logging()
     logging.info('Парсер запущен!')
 
@@ -182,7 +183,7 @@ def main():
     results = MODE_TO_FUNCTION[parser_mode](session)
     if results is not None:
         control_output(results, args)
-    logging.info('Парсер завершил работу.') 
+    logging.info('Парсер завершил работу.')
 
 
 if __name__ == '__main__':
