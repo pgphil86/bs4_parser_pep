@@ -5,7 +5,7 @@ https://github.com/pgphil86
 ![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ### Languages:
 ### I. [Русский язык.](https://github.com/pgphil86/bs4_parser_pep?tab=readme-ov-file#i-проект-pep-парсинг)
-### II. [English language.](https://github.com/pgphil86/bs4_parser_pep?tab=readme-ov-file#i-проект-pep-парсинг)
+### II. [English language.](https://github.com/pgphil86/bs4_parser_pep?tab=readme-ov-file#ii-pep-parsing-project)
 ## I. Проект 'PEP парсинг'.
 
 ### Описание проекта.
