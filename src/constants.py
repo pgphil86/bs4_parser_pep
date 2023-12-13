@@ -18,4 +18,5 @@ LATEST_VERSION_PATTERN = r'Python (?P<version>\d\.\d+) \((?P<status>.*)\)'
 LOG_FORMAT = '"%(asctime)s - [%(levelname)s] - %(message)s"'
 MAIN_DOC_URL = 'https://docs.python.org/3/'
 PEP_DOC_URL = 'https://peps.python.org/'
-TYPE_OF_OUTPUT = ('pretty', 'file')
+OUTPUT_TABLE = 'pretty'
+OUTPUT_FILE = 'file'

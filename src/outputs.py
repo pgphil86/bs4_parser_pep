@@ -4,7 +4,7 @@ import logging
 
 from prettytable import PrettyTable
 
-from constants import BASE_DIR, DATETIME_FORMAT
+from constants import BASE_DIR, DATETIME_FORMAT, OUTPUT_FILE, OUTPUT_TABLE
 
 
 def control_output(results, cli_args):
@@ -13,9 +13,9 @@ def control_output(results, cli_args):
     """
 
     output = cli_args.output
-    if output == 'pretty':
+    if output == OUTPUT_TABLE:
         pretty_output(results)
-    elif output == 'file':
+    elif output == OUTPUT_FILE:
         file_output(results, cli_args)
     else:
         default_output(results)
